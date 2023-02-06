@@ -35,7 +35,6 @@ def postprocess(det_output, w, h, batch_idx=0, interpolation_mode='bilinear',
     dets = det_output[batch_idx]
     net = dets['net']
     dets = dets['detection']
-
     if dets is None:
         return [torch.Tensor()] * 4 # Warning, this is 4 copies of the same thing
 
@@ -118,6 +117,7 @@ def postprocess(det_output, w, h, batch_idx=0, interpolation_mode='bilinear',
             full_masks[jdx, y1:y2, x1:x2] = mask
         
         masks = full_masks
+    # print(masks.cpu().numpy())
 
     return classes, scores, boxes, masks
 
